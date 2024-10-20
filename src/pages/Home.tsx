@@ -24,33 +24,6 @@ const FeatureColumn = styled(VStack)`
   }
 `;
 
-const SmokinText = styled.span`
-  display: inline-block;
-  font-family: 'Fredericka the Great', cursive;
-  font-size: 4rem;
-  color: #FFA07A;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-  position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #FFA07A, transparent);
-  }
-`;
-
-const SmokeEffect = styled.div`
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  animation: ${smokeAnimation} 3s infinite;
-`;
 
 const StyledButton = styled(Button)`
   background: linear-gradient(45deg, #FF1493, #FF69B4);
@@ -105,16 +78,18 @@ const Home = () => {
           />
           <VStack
             spacing={8}
-            justify="center"
+            justify="flex-end"
             align="center"
             h="100%"
             position="relative"
             zIndex="1"
+            pb={32}
           >
             <Heading
               size="4xl"
               color="white"
               textShadow="2px 2px 4px rgba(0,0,0,0.4)"
+              textAlign="center"
             >
               Welcome to{" "}
               <Text as="span" color="pink.400" fontFamily="Fredericka the Great" fontWeight="bold">
@@ -124,6 +99,7 @@ const Home = () => {
             <Text fontSize="2xl" color="white" textAlign="center" maxW="600px">
               Experience the best BBQ in town, where smoke meets flavor!
             </Text>
+            <Box h="40px" /> {/* This adds extra space */}
             <Button
               as={Link}
               to="/menu"
@@ -138,124 +114,175 @@ const Home = () => {
         </ParallaxBanner>
 
 
-        <Box bg="gray.900" py={16} px={8}>
-          <Box position="relative" textAlign="center" py={16}>
-            <SmokinText>
-              Join Us for a Smokin' Good Time!
-            </SmokinText>
-            {[...Array(10)].map((_, i) => (
-              <SmokeEffect
-                key={i}
-                style={{
-                  left: `${Math.random() * 80 + 10}%`,
-                  animationDelay: `${Math.random() * 2}s`,
-                }}
-              />
-            ))}
-            <Text
+        <Box 
+          bg="linear-gradient(to bottom, #1A202C, #2D3748)"
+          py={16} 
+          px={8} 
+          position="relative"
+          overflow="hidden"
+        >
+          <Box
+            position="absolute"
+            top="0"
+            left="0"
+            right="0"
+            height="100%"
+            bgImage="url('/smoke-texture.png')"
+            opacity={0.1}
+            backgroundSize="cover"
+          />
+          <Box
+            position="absolute"
+            top="-10px"
+            left="0"
+            right="0"
+            height="80px"
+            bgGradient="linear(to-b, rgba(236, 72, 153, 0.3), transparent)"
+            filter="blur(15px)"
+          />
+          <VStack spacing={6} position="relative" zIndex={1}>
+            <Heading
+              as="h2"
+              fontSize={["4xl", "5xl", "6xl"]}
               fontFamily="'Fredericka the Great', cursive"
-              fontSize="xl"
+              color="pink.300"
+              textShadow="2px 2px 4px rgba(0,0,0,0.3)"
+            >
+              Join Us for a Smokin' Good Time!
+            </Heading>
+            <Text
+              fontSize={["xl", "2xl"]}
               color="gray.300"
-              mt={4}
+              fontFamily="'Franklin Gothic Medium', sans-serif"
+              textAlign="center"
             >
               Open daily from 11 AM to 10 PM
             </Text>
-          </Box>
-
-
-          <ParallaxBanner
-            layers={[
-              {
-                image: '/beer.jpg',
-                speed: -20,
-                expanded: false,
-                translateY: [0, 50],
-                scale: [1.05, 1, 'easeOutCubic'],
-                shouldAlwaysCompleteAnimation: true,
-              },
-              {
-                children: (
-                  <Box
-                    position="absolute"
-                    top="0"
-                    left="0"
-                    right="0"
-                    bottom="0"
-                    bgGradient="linear(to-b, rgba(0,0,0,0.7), rgba(0,0,0,0.3))"
-                  />
-                ),
-              },
-            ]}
-            style={{ height: '600px', borderRadius: 'lg', overflow: 'hidden' }}
-          >
-            <Flex
-              position="relative"
-              height="100%"
-              justifyContent="space-around"
-              alignItems="center"
-              px={4}
-            >
-              <FeatureColumn maxW="300px" spacing={4}>
-                <StyledIcon as={FaUtensils} w={20} h={20} color="pink.400" />
-                <Text color="white" fontWeight="bold" fontSize="2xl" fontFamily="'Fredericka the Great', cursive" textShadow="2px 2px 4px rgba(0,0,0,0.5)">
-                  Mouthwatering BBQ
-                </Text>
-                <Text color="gray.300" textAlign="center" fontFamily="'Franklin Gothic Medium', sans-serif">
-                  Savor the smoky perfection of our slow-cooked meats, each bite a 
-                  testament to our pitmaster's passion. From tender brisket to 
-                  fall-off-the-bone ribs, our BBQ will transport your taste buds to 
-                  flavor paradise.
-                </Text>
-              </FeatureColumn>
-              <FeatureColumn maxW="300px" spacing={4}>
-                <StyledIcon as={FaGlassCheers} w={20} h={20} color="pink.400" />
-                <Text color="white" fontWeight="bold" fontSize="2xl" fontFamily="'Fredericka the Great', cursive" textShadow="2px 2px 4px rgba(0,0,0,0.5)">
-                  Craft Cocktails
-                </Text>
-                <Text color="gray.300" textAlign="center" fontFamily="'Franklin Gothic Medium', sans-serif">
-                  Sip on liquid artistry with our handcrafted cocktails. Our mixologists 
-                  blend premium spirits with house-made syrups and fresh ingredients, 
-                  creating unique drinks that complement our smoky flavors and ignite 
-                  your senses.
-                </Text>
-              </FeatureColumn>
-              <FeatureColumn maxW="300px" spacing={4}>
-                <StyledIcon as={FaMusic} w={20} h={20} color="pink.400" />
-                <Text color="white" fontWeight="bold" fontSize="2xl" fontFamily="'Fredericka the Great', cursive" textShadow="2px 2px 4px rgba(0,0,0,0.5)">
-                  Live Music
-                </Text>
-                <Text color="gray.300" textAlign="center" fontFamily="'Franklin Gothic Medium', sans-serif">
-                  Let the rhythm move you as local artists set the perfect soundtrack 
-                  to your dining experience. From soulful blues to foot-stomping 
-                  country, our live music nights add that extra sizzle to your 
-                  evening at Pink Pitmaster.
-                </Text>
-              </FeatureColumn>
-            </Flex>
-            {[...Array(10)].map((_, i) => (
-              <Box
-                key={i}
-                position="absolute"
-                top={`${Math.random() * 100}%`}
-                left={`${Math.random() * 100}%`}
-                width="50px"
-                height="50px"
-                borderRadius="50%"
-                bg="rgba(255,255,255,0.1)"
-                animation={`${smokeAnimation} ${5 + Math.random() * 5}s infinite`}
-              />
-            ))}
-          </ParallaxBanner>
-          <VStack spacing={8} align="center" mt={12} mb={16}>
-            <StyledButton
-              as={Link}
-              to="/reserve"
-              leftIcon={<Icon as={FaCalendarAlt} w={6} h={6} />}
-            >
-              Make a Reservation
-            </StyledButton>
           </VStack>
         </Box>
+
+
+        <ParallaxBanner
+          layers={[
+            {
+              image: '/beer.jpg',
+              speed: -20,
+              expanded: false,
+              translateY: [0, 50],
+              scale: [1.05, 1, 'easeOutCubic'],
+              shouldAlwaysCompleteAnimation: true,
+            },
+            {
+              children: (
+                <Box
+                  position="absolute"
+                  top="0"
+                  left="0"
+                  right="0"
+                  bottom="0"
+                  bgGradient="linear(to-b, rgba(0,0,0,0.7), rgba(0,0,0,0.3))"
+                />
+              ),
+            },
+          ]}
+          style={{ height: '600px', borderRadius: 'lg', overflow: 'hidden' }}
+        >
+          <Flex
+            position="relative"
+            height="100%"
+            justifyContent="space-around"
+            alignItems="center"
+            px={4}
+          >
+            <FeatureColumn maxW="300px" spacing={4}>
+              <StyledIcon as={FaUtensils} w={20} h={20} color="pink.400" />
+              <Text color="white" fontWeight="bold" fontSize="2xl" fontFamily="'Fredericka the Great', cursive" textShadow="2px 2px 4px rgba(0,0,0,0.5)">
+                Mouthwatering BBQ
+              </Text>
+              <Text color="gray.300" textAlign="center" fontFamily="'Franklin Gothic Medium', sans-serif">
+                Savor the smoky perfection of our slow-cooked meats, each bite a 
+                testament to our pitmaster's passion. From tender brisket to 
+                fall-off-the-bone ribs, our BBQ will transport your taste buds to 
+                flavor paradise.
+              </Text>
+            </FeatureColumn>
+            <FeatureColumn maxW="300px" spacing={4}>
+              <StyledIcon as={FaGlassCheers} w={20} h={20} color="pink.400" />
+              <Text color="white" fontWeight="bold" fontSize="2xl" fontFamily="'Fredericka the Great', cursive" textShadow="2px 2px 4px rgba(0,0,0,0.5)">
+                Craft Cocktails
+              </Text>
+              <Text color="gray.300" textAlign="center" fontFamily="'Franklin Gothic Medium', sans-serif">
+                Sip on liquid artistry with our handcrafted cocktails. Our mixologists 
+                blend premium spirits with house-made syrups and fresh ingredients, 
+                creating unique drinks that complement our smoky flavors and ignite 
+                your senses.
+              </Text>
+            </FeatureColumn>
+            <FeatureColumn maxW="300px" spacing={4}>
+              <StyledIcon as={FaMusic} w={20} h={20} color="pink.400" />
+              <Text color="white" fontWeight="bold" fontSize="2xl" fontFamily="'Fredericka the Great', cursive" textShadow="2px 2px 4px rgba(0,0,0,0.5)">
+                Live Music
+              </Text>
+              <Text color="gray.300" textAlign="center" fontFamily="'Franklin Gothic Medium', sans-serif">
+                Let the rhythm move you as local artists set the perfect soundtrack 
+                to your dining experience. From soulful blues to foot-stomping 
+                country, our live music nights add that extra sizzle to your 
+                evening at Pink Pitmaster.
+              </Text>
+            </FeatureColumn>
+          </Flex>
+          {[...Array(10)].map((_, i) => (
+            <Box
+              key={i}
+              position="absolute"
+              top={`${Math.random() * 100}%`}
+              left={`${Math.random() * 100}%`}
+              width="50px"
+              height="50px"
+              borderRadius="50%"
+              bg="rgba(255,255,255,0.1)"
+              animation={`${smokeAnimation} ${5 + Math.random() * 5}s infinite`}
+            />
+          ))}
+        </ParallaxBanner>
+        <VStack spacing={8} align="center" mt={12} mb={16} position="relative">
+          <Box position="absolute" top="-30px" left="0" right="0" zIndex="0">
+            <svg
+              width="100%"
+              height="120px"
+              viewBox="0 0 1000 120"
+              preserveAspectRatio="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="
+                  M0,60 
+                  C150,120 350,0 500,60 
+                  C650,120 850,0 1000,60 
+                  L1000,120 L0,120 Z
+                "
+                fill="rgba(236, 72, 153, 0.3)"  // Adjusted pink color with transparency
+              />
+              <path
+                d="
+                  M0,60 
+                  C200,120 300,0 500,60 
+                  C700,120 800,0 1000,60 
+                  L1000,120 L0,120 Z
+                "
+                fill="rgba(236, 72, 153, 0.2)"  // Second layer with less opacity
+              />
+            </svg>
+          </Box>
+          <StyledButton
+            as={Link}
+            to="/reserve"
+            leftIcon={<Icon as={FaCalendarAlt} w={6} h={6} />}
+            zIndex="1"
+          >
+            Make a Reservation
+          </StyledButton>
+        </VStack>
       </Box>
     </ParallaxProvider>
   );

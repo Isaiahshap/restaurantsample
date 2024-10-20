@@ -18,13 +18,14 @@ const bounceAnimation = keyframes`
 const Navbar: React.FC = () => {
   return (
     <Box
-      bgGradient="linear(to-r, black, gray.800)"
+      bgGradient="linear(to-r, rgba(0,0,0,0.6), rgba(23,25,35,0.6))"
       px={6}
       py={4}
       position="fixed"
       width="100%"
       zIndex="999"
       boxShadow="md"
+      backdropFilter="blur(8px)"
     >
       <Flex h={20} alignItems="center" justifyContent="space-between" maxW="1200px" mx="auto">
         <HStack spacing={8} alignItems="center">
