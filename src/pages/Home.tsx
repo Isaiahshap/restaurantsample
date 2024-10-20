@@ -97,7 +97,7 @@ const Home = () => {
               </Text>
             </Heading>
             <Text fontSize="2xl" color="white" textAlign="center" maxW="600px">
-              Experience the best BBQ in town, where smoke meets flavor!
+              Experience the best BBQ in town, where flavor has lived since 1946!
             </Text>
             <Box h="40px" /> {/* This adds extra space */}
             <Button
