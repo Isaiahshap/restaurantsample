@@ -32,7 +32,7 @@ const signatureDishes = [
 
 const About = () => {
   return (
-    <Box bg="gray.900" py={20} px={8}>
+    <Box bg="gray.900" py={20} px={8} pt={32}>
       <VStack spacing={16} maxW="1200px" mx="auto">
         <Heading as="h1" size="3xl" color="pink.400" textAlign="center">
           The Pink Pitmaster Story

@@ -1,4 +1,6 @@
-import { Box, Heading, SimpleGrid, Image, Text, VStack, Divider } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, Image, Text, VStack, Divider, Icon } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+import { FaUtensils } from "react-icons/fa";
 
 interface MenuItem {
   title: string;
@@ -69,9 +71,102 @@ const menuCategories = [
         price: "$6.99",
         image: "/banana.jpg",
       },
+      {
+        title: "Chocolate Lava Cake",
+        description: "Rich chocolate cake with a gooey molten center",
+        price: "$8.49",
+        image: "/lava.jpg",
+      },
     ],
   },
+  {
+    category: "Drinks",
+    items: [
+      {
+        title: "Sweet Tea",
+        description: "Classic Southern sweet tea",
+        price: "$2.99",
+        image: ""
+      },
+      {
+        title: "Pink Lemonade",
+        description: "Freshly squeezed lemonade with a hint of strawberry",
+        price: "$3.49",
+        image: ""
+      },
+      {
+        title: "Coca-Cola",
+        description: "Ice-cold classic Coke",
+        price: "$2.49",
+        image: ""
+      },
+      {
+        title: "Sparkling Water",
+        description: "Refreshing seltzer water",
+        price: "$1.99",
+        image: ""
+      },
+      {
+        title: "Still Water",
+        description: "Chilled bottled water",
+        price: "$1.49",
+        image: ""
+      },
+      {
+        title: "Craft Beer",
+        description: "Rotating selection of local craft beers",
+        price: "$5.99",
+        image: ""
+      },
+      {
+        title: "Bourbon BBQ Old Fashioned",
+        description: "Our signature cocktail with bourbon and a touch of BBQ sauce",
+        price: "$8.99",
+        image: ""
+      },
+      {
+        title: "Smoky Margarita",
+        description: "Tequila, lime, and a hint of mezcal for a smoky twist",
+        price: "$7.99",
+        image: ""
+      }
+    ]
+  }
 ];
+
+const AnimatedMenuItem = ({ item }: { item: MenuItem }) => {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+    >
+      <Box
+        bg="gray.800"
+        borderRadius="lg"
+        overflow="hidden"
+        boxShadow="md"
+        position="relative"
+        h="100%"
+      >
+        {item.image && (
+          <Image src={item.image} alt={item.title} h="200px" w="100%" objectFit="cover" />
+        )}
+        <VStack p={4} align="start" spacing={2} h={item.image ? "auto" : "100%"} justify="space-between">
+          <Box>
+            <Heading as="h3" size="md" color="white">
+              {item.title}
+            </Heading>
+            <Text color="gray.300" fontSize="sm">
+              {item.description}
+            </Text>
+          </Box>
+          <Text color="pink.400" fontWeight="bold">
+            {item.price}
+          </Text>
+        </VStack>
+      </Box>
+    </motion.div>
+  );
+};
 
 const MenuCategory = ({ category, items }: { category: string; items: MenuItem[] }) => (
   <Box mb={12}>
@@ -80,20 +175,7 @@ const MenuCategory = ({ category, items }: { category: string; items: MenuItem[]
     </Heading>
     <SimpleGrid columns={[1, 2, 3]} spacing={8}>
       {items.map((item, index) => (
-        <Box key={index} bg="gray.800" borderRadius="lg" overflow="hidden" boxShadow="md">
-          <Image src={item.image} alt={item.title} h="200px" w="100%" objectFit="cover" />
-          <VStack p={4} align="start" spacing={2}>
-            <Heading as="h3" size="md" color="white">
-              {item.title}
-            </Heading>
-            <Text color="gray.300" fontSize="sm">
-              {item.description}
-            </Text>
-            <Text color="pink.400" fontWeight="bold">
-              {item.price}
-            </Text>
-          </VStack>
-        </Box>
+        <AnimatedMenuItem key={index} item={item} />
       ))}
     </SimpleGrid>
   </Box>
@@ -101,15 +183,39 @@ const MenuCategory = ({ category, items }: { category: string; items: MenuItem[]
 
 const Menu = () => {
   return (
-    <Box bg="gray.900" pt={24} pb={16} px={8}>
+    <Box bg="gray.900" pt={32} pb={16} px={8}>
       <VStack spacing={12} maxW="1200px" mx="auto">
-        <Box textAlign="center">
-          <Heading as="h1" size="4xl" color="white" mb={4}>
-            Our Menu
-          </Heading>
-          <Text color="pink.400" fontSize="2xl" fontStyle="italic">
-            Smokin' Hot Flavors Await
-          </Text>
+        <Box 
+          w="full" 
+          borderRadius="lg" 
+          p={8}
+          position="relative"
+          overflow="hidden"
+        >
+          <Box
+            position="absolute"
+            top={0}
+            left={0}
+            right={0}
+            bottom={0}
+            backgroundImage="url('/fire.jpg')"
+            backgroundSize="cover"
+            backgroundPosition="center"
+            filter="brightness(0.4)"
+          />
+          <Box
+            position="relative"
+            zIndex={1}
+          >
+            <Heading as="h1" size="4xl" color="white" mb={4} textAlign="center">
+              <Icon as={FaUtensils} color="pink.400" mr={2} />
+              Our Menu
+              <Icon as={FaUtensils} color="pink.400" ml={2} />
+            </Heading>
+            <Text color="pink.400" fontSize="2xl" fontStyle="italic" textAlign="center">
+              Smokin' Hot Flavors Await
+            </Text>
+          </Box>
         </Box>
         <Text color="gray.300" fontSize="lg" textAlign="center" maxW="800px">
           Indulge in our mouthwatering selection of slow-smoked meats, homestyle sides, and delectable desserts. All our dishes are crafted with love and the finest ingredients.

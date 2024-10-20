@@ -1,14 +1,41 @@
 import React from "react";
 import { Box, Flex, Link, HStack, Button, Text } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
+import { keyframes } from "@emotion/react";
+
+const bounceAnimation = keyframes`
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+`;
 
 const Navbar: React.FC = () => {
   return (
-    <Box bg="black" px={4} position="fixed" width="100%" zIndex="999">
+    <Box
+      bgGradient="linear(to-r, black, gray.800)"
+      px={6}
+      py={4}
+      position="fixed"
+      width="100%"
+      zIndex="999"
+      boxShadow="md"
+    >
       <Flex h={20} alignItems="center" justifyContent="space-between" maxW="1200px" mx="auto">
         <HStack spacing={8} alignItems="center">
           <Link as={RouterLink} to="/" _hover={{ textDecoration: 'none' }}>
-            <Text fontWeight="bold" fontSize="2xl" color="pink.400" fontFamily="cursive">
+            <Text
+              fontWeight="bold"
+              fontSize="2xl"
+              color="pink.400"
+              fontFamily="cursive"
+              _hover={{ animation: `${bounceAnimation} 1s ease`, color: "pink.300" }}
+            >
               Pink Pitmaster
             </Text>
           </Link>
@@ -21,10 +48,12 @@ const Navbar: React.FC = () => {
         <Button
           as={RouterLink}
           to="/reserve"
-          colorScheme="pink"
-          variant="outline"
-          size="md"
-          _hover={{ bg: "pink.500", color: "white" }}
+          bgGradient="linear(to-r, pink.400, pink.600)"
+          color="white"
+          rounded="full"
+          boxShadow="sm"
+          _hover={{ bgGradient: "linear(to-r, pink.500, pink.700)", boxShadow: "md" }}
+          _active={{ bgGradient: "linear(to-r, pink.600, pink.800)", boxShadow: "lg" }}
         >
           Reserve Now
         </Button>

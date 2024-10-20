@@ -1,11 +1,5 @@
 import { Box, Text, Flex, VStack, HStack, Icon, Link } from "@chakra-ui/react";
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
-import { keyframes } from "@emotion/react";
-
-const moveBBQSmoke = keyframes`
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-`;
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -18,14 +12,14 @@ const Footer = () => {
           <Text color="gray.300">Smokin' hot flavors since 2010</Text>
         </VStack>
         <HStack spacing={6} mb={8}>
-          <Link href="https://facebook.com" isExternal>
-            <Icon as={FaFacebook} w={6} h={6} color="pink.400" _hover={{ color: "pink.300" }} />
+          <Link href="https://github.com/isaiahshap" isExternal>
+            <Icon as={FaGithub} w={6} h={6} color="pink.400" _hover={{ color: "pink.300" }} />
           </Link>
-          <Link href="https://instagram.com" isExternal>
+          <Link href="https://instagram.com/yeshaya_" isExternal>
             <Icon as={FaInstagram} w={6} h={6} color="pink.400" _hover={{ color: "pink.300" }} />
           </Link>
-          <Link href="https://twitter.com" isExternal>
-            <Icon as={FaTwitter} w={6} h={6} color="pink.400" _hover={{ color: "pink.300" }} />
+          <Link href="https://www.linkedin.com/in/yeshaya-shapiro-973238221/" isExternal>
+            <Icon as={FaLinkedin} w={6} h={6} color="pink.400" _hover={{ color: "pink.300" }} />
           </Link>
         </HStack>
       </Flex>
@@ -39,17 +33,6 @@ const Footer = () => {
             <Link href="/terms" _hover={{ color: "pink.400" }}>Terms of Service</Link>
           </HStack>
         </Flex>
-      </Box>
-      <Box position="relative" overflow="hidden" height="4px" mt={4}>
-        <Box
-          position="absolute"
-          top="0"
-          left="0"
-          right="0"
-          bottom="0"
-          bgGradient="linear(to-r, pink.400, pink.600, pink.400)"
-          animation={`${moveBBQSmoke} 10s linear infinite`}
-        />
       </Box>
     </Box>
   );
