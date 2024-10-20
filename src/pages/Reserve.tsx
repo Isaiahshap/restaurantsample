@@ -41,7 +41,7 @@ const Reserve = () => {
   };
 
   return (
-    <Box bg="gray.900" minH="100vh" pt={24} pb={20} px={8}>
+    <Box bg="gray.900" minH="100vh" pt={32} pb={20} px={8}>
       <Box maxW="600px" mx="auto">
         <VStack spacing={12}>
           <Heading as="h1" size="3xl" color="pink.400" textAlign="center">

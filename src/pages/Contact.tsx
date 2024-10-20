@@ -24,37 +24,32 @@ const Contact = () => {
   };
 
   return (
-    <Box bg="gray.900" minH="100vh" py={20} px={8}>
-      <VStack spacing={12} maxW="1200px" mx="auto">
-        <Box 
-          w="full" 
-          borderRadius="lg" 
-          p={12}
-          position="relative"
-          overflow="hidden"
-        >
-          <Box
-            position="absolute"
-            top={0}
-            left={0}
-            right={0}
-            bottom={0}
-            backgroundImage="url('/smoky-bg.jpg')"
-            backgroundSize="cover"
-            backgroundPosition="center"
-            filter="brightness(0.3)"
+    <Box bg="gray.900" py={20} px={8} pt={32}>
+      <VStack spacing={8} maxW="1200px" mx="auto">
+        <Box position="relative" width="100%" textAlign="center">
+          <Icon 
+            as={FaPhone} 
+            color="pink.400" 
+            boxSize={40} 
+            position="absolute" 
+            top="80%" 
+            left="20%" 
+            transform="translate(-50%, -50%)" 
+            opacity={0.3}
           />
-          <Box
-            position="relative"
-            zIndex={1}
-          >
-            <Heading as="h1" size="4xl" color="white" mb={4} textAlign="center">
+          <VStack spacing={2} position="relative" zIndex={1}>
+            <Heading
+              as="h1"
+              size="4xl"
+              color="white"
+              fontFamily="Fredericka the Great"
+            >
               Get in Touch
             </Heading>
-            <Text color="pink.400" fontSize="2xl" fontStyle="italic" textAlign="center">
+            <Text color="pink.400" fontSize="2xl" fontStyle="italic">
               Let's Fire Up a Conversation!
             </Text>
-          </Box>
+          </VStack>
         </Box>
         <Text fontSize="xl" color="gray.300" textAlign="center" maxW="800px">
           Have a question or want to make a reservation? We'd love to hear from you! 

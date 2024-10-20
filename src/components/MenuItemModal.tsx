@@ -13,6 +13,7 @@ import {
   VStack,
   HStack,
   Tag,
+  Box,
 } from '@chakra-ui/react';
 import { MenuItem } from '../pages/Menu';
 
@@ -20,9 +21,10 @@ interface MenuItemModalProps {
   isOpen: boolean;
   onClose: () => void;
   item: MenuItem;
+  isVegan?: boolean;
 }
 
-const MenuItemModal: React.FC<MenuItemModalProps> = ({ isOpen, onClose, item }) => {
+const MenuItemModal: React.FC<MenuItemModalProps> = ({ isOpen, onClose, item, isVegan = false }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
@@ -64,6 +66,11 @@ const MenuItemModal: React.FC<MenuItemModalProps> = ({ isOpen, onClose, item }) 
               <Text>
                 <Text as="span" fontWeight="bold">Calories:</Text> {item.calories}
               </Text>
+            )}
+            {isVegan && (
+              <Box mt={4} p={3} bg="green.700" borderRadius="md">
+                <Text fontWeight="bold">Available upon special request</Text>
+              </Box>
             )}
           </VStack>
         </ModalBody>

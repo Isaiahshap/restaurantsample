@@ -1,7 +1,8 @@
-import { Box, Heading, SimpleGrid, Image, Text, VStack, Divider, Icon, useDisclosure } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, Image, Text, VStack, Divider, Icon, useDisclosure, Button } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { FaUtensils } from "react-icons/fa";
+import { FaUtensils, FaLeaf } from "react-icons/fa";
 import MenuItemModal from '../components/MenuItemModal';
+import { Link as RouterLink } from 'react-router-dom';
 
 export interface MenuItem {
   title: string;
@@ -160,6 +161,12 @@ const menuCategories = [
         description: "Tequila, lime, and a hint of mezcal for a smoky twist",
         price: "$7.99",
         image: ""
+      },
+      {
+        title: "Smoked Maple Old Fashioned",
+        description: "Bourbon infused with smoked maple syrup and bitters",
+        price: "$9.99",
+        image: ""
       }
     ]
   }
@@ -208,7 +215,14 @@ const AnimatedMenuItem = ({ item, category }: { item: MenuItem; category: string
 
 const MenuCategory = ({ category, items }: { category: string; items: MenuItem[] }) => (
   <Box mb={12}>
-    <Heading as="h2" size="xl" color="pink.400" mb={6}>
+    <Heading
+      as="h2"
+      size="xl"
+      color="pink.400"
+      mb={6}
+      textAlign="center"
+      fontFamily="Fredericka the Great"
+    >
       {category}
     </Heading>
     <SimpleGrid columns={[1, 2, 3]} spacing={8}>
@@ -245,7 +259,7 @@ const Menu = () => {
             position="relative"
             zIndex={1}
           >
-            <Heading as="h1" size="4xl" color="white" mb={4} textAlign="center">
+            <Heading as="h1" size="4xl" color="white" mb={4} textAlign="center" fontFamily="Fredericka the Great">
               <Icon as={FaUtensils} color="pink.400" mr={2} />
               Our Menu
               <Icon as={FaUtensils} color="pink.400" ml={2} />
@@ -262,6 +276,17 @@ const Menu = () => {
         {menuCategories.map((category, index) => (
           <MenuCategory key={index} category={category.category} items={category.items} />
         ))}
+        <Box mt={12} textAlign="center">
+          <Button
+            as={RouterLink}
+            to="/about#vegan-menu"
+            size="lg"
+            colorScheme="green"
+            leftIcon={<Icon as={FaLeaf} />}
+          >
+            Explore Our Vegan Menu
+          </Button>
+        </Box>
       </VStack>
     </Box>
   );

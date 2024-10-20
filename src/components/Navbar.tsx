@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Link, HStack, Button, Text } from "@chakra-ui/react";
+import { Box, Flex, Link, HStack, Button, Text, Image } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { keyframes } from "@emotion/react";
 
@@ -29,6 +29,22 @@ const Navbar: React.FC = () => {
       <Flex h={20} alignItems="center" justifyContent="space-between" maxW="1200px" mx="auto">
         <HStack spacing={8} alignItems="center">
           <Link as={RouterLink} to="/" _hover={{ textDecoration: 'none' }}>
+            <Box
+              position="relative"
+              transition="transform 0.3s ease-in-out"
+              _hover={{ transform: 'scale(1.1)' }}
+            >
+              <Image
+                src="/logo.png"
+                alt="Pink Pitmaster Logo"
+                boxSize="80px"
+                opacity={0.8}
+                transition="opacity 0.3s ease-in-out"
+                _hover={{ opacity: 1 }}
+              />
+            </Box>
+          </Link>
+          <Link as={RouterLink} to="/" _hover={{ textDecoration: 'none' }}>
             <Text
               fontWeight="bold"
               fontSize="2xl"
@@ -50,6 +66,7 @@ const Navbar: React.FC = () => {
           to="/reserve"
           bgGradient="linear(to-r, pink.400, pink.600)"
           color="white"
+          fontFamily="Fredericka the Great"
           rounded="full"
           boxShadow="sm"
           _hover={{ bgGradient: "linear(to-r, pink.500, pink.700)", boxShadow: "md" }}
