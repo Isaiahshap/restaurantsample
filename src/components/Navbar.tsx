@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
               fontWeight="bold"
               fontSize="2xl"
               color="pink.400"
-              fontFamily="cursive"
+              fontFamily="Fredericka the Great"
               _hover={{ animation: `${bounceAnimation} 1s ease`, color: "pink.300" }}
             >
               Pink Pitmaster

@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Button, VStack, HStack, Icon } from "@chakra-ui/react";
+import { Box, Heading, Text, Button, VStack, HStack, Icon, Image, Divider } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { ParallaxProvider, ParallaxBanner } from 'react-scroll-parallax';
 import { FaUtensils, FaGlassCheers, FaMusic, FaCalendarAlt } from "react-icons/fa";
@@ -51,7 +51,7 @@ const Home = () => {
               textShadow="2px 2px 4px rgba(0,0,0,0.4)"
             >
               Welcome to{" "}
-              <Text as="span" color="pink.400" fontFamily="cursive" fontWeight="bold">
+              <Text as="span" color="pink.400" fontFamily="Fredericka the Great" fontWeight="bold">
                 Pink Pitmaster
               </Text>
             </Heading>
@@ -76,10 +76,31 @@ const Home = () => {
             <Heading color="white" size="2xl" textAlign="center">
               Join Us for a Smokin' Good Time!
             </Heading>
+            <Divider
+              borderColor="pink.400"
+              borderWidth="1px"
+              width="70%"
+              opacity={0.6}
+              css={{
+                boxShadow: '0 0 10px #D53F8C',
+              }}
+            />
+
             <Text color="gray.300" fontSize="xl" textAlign="center">
               Open daily from 11 AM to 10 PM
             </Text>
-            <HStack spacing={6} wrap="wrap" justify="center">
+            <Divider
+              borderColor="pink.400"
+              borderWidth="1px"
+              width="30%"
+              opacity={0.6}
+              css={{
+                boxShadow: '0 0 10px #D53F8C',
+              }}
+            />
+
+            <HStack spacing={20} wrap="wrap" justify="center">
+              <Image src="/mic.jpg" alt="Microphone" boxSize="250px" objectFit="cover" borderRadius="md" />
               <VStack>
                 <Icon as={FaUtensils} w={8} h={8} color="pink.400" />
                 <Text color="white" fontWeight="bold">Mouthwatering BBQ</Text>
@@ -92,6 +113,7 @@ const Home = () => {
                 <Icon as={FaMusic} w={8} h={8} color="pink.400" />
                 <Text color="white" fontWeight="bold">Live Music</Text>
               </VStack>
+              <Image src="/beer.jpg" alt="Beer" boxSize="250px" objectFit="cover" borderRadius="md" />
             </HStack>
             <Button
               as={Link}

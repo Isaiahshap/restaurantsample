@@ -1,12 +1,16 @@
-import { Box, Heading, SimpleGrid, Image, Text, VStack, Divider, Icon } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, Image, Text, VStack, Divider, Icon, useDisclosure } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { FaUtensils } from "react-icons/fa";
+import MenuItemModal from '../components/MenuItemModal';
 
-interface MenuItem {
+export interface MenuItem {
   title: string;
   description: string;
   price: string;
   image: string;
+  ingredients?: string[];
+  allergens?: string[];
+  calories?: number;
 }
 
 const menuCategories = [
@@ -18,18 +22,27 @@ const menuCategories = [
         description: "Slow-smoked for 12 hours, served with our house BBQ sauce",
         price: "$18.99",
         image: "/brisket.jpg",
+        ingredients: ["Beef brisket", "House BBQ sauce", "Spices"],
+        allergens: ["None"],
+        calories: 450,
       },
       {
         title: "Pulled Pork",
         description: "Tender pulled pork with Carolina-style vinegar sauce",
         price: "$16.99",
         image: "/pork.jpg",
+        ingredients: ["Pork shoulder", "Carolina-style vinegar sauce", "Spices"],
+        allergens: ["None"],
+        calories: 380,
       },
       {
         title: "BBQ Ribs",
         description: "Fall-off-the-bone ribs with our secret dry rub",
         price: "$21.99",
         image: "/ribs.jpg",
+        ingredients: ["Pork ribs", "Secret dry rub", "BBQ sauce"],
+        allergens: ["None"],
+        calories: 520,
       },
     ],
   },
@@ -41,18 +54,27 @@ const menuCategories = [
         description: "Creamy three-cheese blend with a crispy top",
         price: "$5.99",
         image: "/mac.jpg",
+        ingredients: ["Elbow macaroni", "Cheddar cheese", "Gouda cheese", "Parmesan cheese", "Milk", "Butter", "Breadcrumbs"],
+        allergens: ["Milk", "Wheat"],
+        calories: 450,
       },
       {
         title: "Coleslaw",
         description: "Crunchy cabbage slaw with a tangy dressing",
         price: "$3.99",
         image: "/coleslaw.jpg",
+        ingredients: ["Cabbage", "Carrots", "Mayonnaise", "Apple cider vinegar", "Sugar", "Celery seeds"],
+        allergens: ["Eggs"],
+        calories: 180,
       },
       {
         title: "Cornbread",
         description: "Sweet and savory cornbread with honey butter",
         price: "$4.99",
         image: "/corn.jpg",
+        ingredients: ["Cornmeal", "Flour", "Milk", "Eggs", "Butter", "Honey"],
+        allergens: ["Milk", "Eggs", "Wheat"],
+        calories: 320,
       },
     ],
   },
@@ -64,18 +86,27 @@ const menuCategories = [
         description: "Warm peach cobbler with vanilla ice cream",
         price: "$7.99",
         image: "/peach.jpg",
+        ingredients: ["Fresh peaches", "Sugar", "Cinnamon", "Butter", "Flour", "Vanilla ice cream"],
+        allergens: ["Milk", "Wheat"],
+        calories: 480,
       },
       {
         title: "Banana Pudding",
         description: "Classic Southern banana pudding with wafers",
         price: "$6.99",
         image: "/banana.jpg",
+        ingredients: ["Bananas", "Vanilla wafers", "Milk", "Sugar", "Eggs", "Vanilla extract"],
+        allergens: ["Milk", "Eggs", "Wheat"],
+        calories: 390,
       },
       {
         title: "Chocolate Lava Cake",
         description: "Rich chocolate cake with a gooey molten center",
         price: "$8.49",
         image: "/lava.jpg",
+        ingredients: ["Dark chocolate", "Butter", "Eggs", "Sugar", "Flour", "Vanilla extract"],
+        allergens: ["Milk", "Eggs", "Wheat"],
+        calories: 550,
       },
     ],
   },
@@ -134,37 +165,44 @@ const menuCategories = [
   }
 ];
 
-const AnimatedMenuItem = ({ item }: { item: MenuItem }) => {
+const AnimatedMenuItem = ({ item, category }: { item: MenuItem; category: string }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-    >
-      <Box
-        bg="gray.800"
-        borderRadius="lg"
-        overflow="hidden"
-        boxShadow="md"
-        position="relative"
-        h="100%"
+    <>
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        onClick={category !== "Drinks" ? onOpen : undefined}
+        style={{ cursor: category !== "Drinks" ? 'pointer' : 'default' }}
       >
-        {item.image && (
-          <Image src={item.image} alt={item.title} h="200px" w="100%" objectFit="cover" />
-        )}
-        <VStack p={4} align="start" spacing={2} h={item.image ? "auto" : "100%"} justify="space-between">
-          <Box>
-            <Heading as="h3" size="md" color="white">
-              {item.title}
-            </Heading>
-            <Text color="gray.300" fontSize="sm">
-              {item.description}
+        <Box
+          bg="gray.800"
+          borderRadius="lg"
+          overflow="hidden"
+          boxShadow="md"
+          position="relative"
+          h="100%"
+        >
+          {item.image && (
+            <Image src={item.image} alt={item.title} h="200px" w="100%" objectFit="cover" />
+          )}
+          <VStack p={4} align="start" spacing={2} h={item.image ? "auto" : "100%"} justify="space-between">
+            <Box>
+              <Heading as="h3" size="md" color="white">
+                {item.title}
+              </Heading>
+              <Text color="gray.300" fontSize="sm">
+                {item.description}
+              </Text>
+            </Box>
+            <Text color="pink.400" fontWeight="bold">
+              {item.price}
             </Text>
-          </Box>
-          <Text color="pink.400" fontWeight="bold">
-            {item.price}
-          </Text>
-        </VStack>
-      </Box>
-    </motion.div>
+          </VStack>
+        </Box>
+      </motion.div>
+      {category !== "Drinks" && <MenuItemModal isOpen={isOpen} onClose={onClose} item={item} />}
+    </>
   );
 };
 
@@ -175,7 +213,7 @@ const MenuCategory = ({ category, items }: { category: string; items: MenuItem[]
     </Heading>
     <SimpleGrid columns={[1, 2, 3]} spacing={8}>
       {items.map((item, index) => (
-        <AnimatedMenuItem key={index} item={item} />
+        <AnimatedMenuItem key={index} item={item} category={category} />
       ))}
     </SimpleGrid>
   </Box>

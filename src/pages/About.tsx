@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Image, Stack, VStack, HStack, Icon, SimpleGrid, Button, Flex } from "@chakra-ui/react";
+import { Box, Heading, Text, Image, Stack, VStack, Icon, SimpleGrid, Button, Flex } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { FaFire, FaUtensils, FaHeart } from "react-icons/fa";
 

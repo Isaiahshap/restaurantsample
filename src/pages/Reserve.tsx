@@ -41,7 +41,7 @@ const Reserve = () => {
   };
 
   return (
-    <Box bg="gray.900" pt={32} pb={16} px={8}>
+    <Box bg="gray.900" minH="100vh" pt={24} pb={20} px={8}>
       <Box maxW="600px" mx="auto">
         <VStack spacing={12}>
           <Heading as="h1" size="3xl" color="pink.400" textAlign="center">
@@ -60,8 +60,8 @@ const Reserve = () => {
             boxShadow="xl"
           >
             <VStack spacing={6}>
-              <FormControl isRequired>
-                <FormLabel color="white" _after={{ content: '""' }}>
+              <FormControl>
+                <FormLabel color="white">
                   <Flex align="center">
                     <Icon as={FaUsers} color="pink.400" mr={2} />
                     Your Name <Text as="span" color="pink.400" ml={1}>*</Text>
@@ -78,7 +78,7 @@ const Reserve = () => {
                   _focus={{ borderColor: 'pink.400' }}
                 />
               </FormControl>
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel color="white">
                   <Flex align="center">
                     <Icon as={FaUsers} color="pink.400" mr={2} />
@@ -96,7 +96,7 @@ const Reserve = () => {
                   _focus={{ borderColor: 'pink.400' }}
                 />
               </FormControl>
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel color="white">
                   <Flex align="center">
                     <Icon as={FaCalendarAlt} color="pink.400" mr={2} />
@@ -113,7 +113,7 @@ const Reserve = () => {
                   _focus={{ borderColor: 'pink.400' }}
                 />
               </FormControl>
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel color="white">
                   <Flex align="center">
                     <Icon as={FaClock} color="pink.400" mr={2} />
@@ -136,7 +136,7 @@ const Reserve = () => {
                   <option value="21:00">9:00 PM</option>
                 </Select>
               </FormControl>
-              <FormControl isRequired>
+              <FormControl>
                 <FormLabel color="white">
                   <Flex align="center">
                     <Icon as={FaUsers} color="pink.400" mr={2} />
