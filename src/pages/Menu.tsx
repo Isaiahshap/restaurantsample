@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FaUtensils, FaLeaf } from "react-icons/fa";
 import MenuItemModal from '../components/MenuItemModal';
 import { Link as RouterLink } from 'react-router-dom';
+import { ParallaxBanner, ParallaxProvider } from 'react-scroll-parallax';
 
 export interface MenuItem {
   title: string;
@@ -191,7 +192,12 @@ const AnimatedMenuItem = ({ item, category }: { item: MenuItem; category: string
           h="100%"
         >
           {item.image && (
-            <Image src={item.image} alt={item.title} h="200px" w="100%" objectFit="cover" />
+            <ParallaxBanner
+              layers={[{ image: item.image, speed: -5 }]} // Changed speed from -15 to -5
+              style={{ height: '200px' }}
+            >
+              <Image src={item.image} alt={item.title} h="200px" w="100%" objectFit="cover" style={{ opacity: 0 }} />
+            </ParallaxBanner>
           )}
           <VStack p={4} align="start" spacing={2} h={item.image ? "auto" : "100%"} justify="space-between">
             <Box>
@@ -235,60 +241,71 @@ const MenuCategory = ({ category, items }: { category: string; items: MenuItem[]
 
 const Menu = () => {
   return (
-    <Box bg="gray.900" pt={32} pb={16} px={8}>
-      <VStack spacing={12} maxW="1200px" mx="auto">
-        <Box 
-          w="full" 
-          borderRadius="lg" 
-          p={8}
-          position="relative"
-          overflow="hidden"
-        >
-          <Box
-            position="absolute"
-            top={0}
-            left={0}
-            right={0}
-            bottom={0}
-            backgroundImage="url('/fire.jpg')"
-            backgroundSize="cover"
-            backgroundPosition="center"
-            filter="brightness(0.4)"
-          />
-          <Box
-            position="relative"
-            zIndex={1}
+    <ParallaxProvider>
+      <Box bg="gray.900" pt={32} pb={16} px={8}>
+        <VStack spacing={12} maxW="1200px" mx="auto">
+          <ParallaxBanner
+            layers={[
+              {
+                image: '/fire.jpg',
+                speed: -20,
+              },
+            ]}
+            style={{ height: '300px', borderRadius: 'lg', overflow: 'hidden' }}
           >
-            <Heading as="h1" size="4xl" color="white" mb={4} textAlign="center" fontFamily="Fredericka the Great">
-              <Icon as={FaUtensils} color="pink.400" mr={2} />
-              Our Menu
-              <Icon as={FaUtensils} color="pink.400" ml={2} />
-            </Heading>
-            <Text color="pink.400" fontSize="2xl" fontStyle="italic" textAlign="center">
-              Smokin' Hot Flavors Await
-            </Text>
+            <Box
+              position="absolute"
+              top={0}
+              left={0}
+              right={0}
+              bottom={0}
+              bg="rgba(0,0,0,0.6)"
+            />
+            <Box
+              position="relative"
+              zIndex={1}
+              h="100%"
+              w="100%"
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Heading as="h1" size="4xl" color="white" mb={4} textAlign="center" fontFamily="Fredericka the Great">
+                <Icon as={FaUtensils} color="pink.400" mr={2} />
+                Our Menu
+                <Icon as={FaUtensils} color="pink.400" ml={2} />
+              </Heading>
+              <Text color="pink.400" fontSize="2xl" fontStyle="italic" textAlign="center">
+                Smokin' Hot Flavors Await
+              </Text>
+            </Box>
+          </ParallaxBanner>
+          <Text color="gray.300" fontSize="lg" textAlign="center" maxW="800px">
+            Indulge in our mouthwatering selection of slow-smoked meats, homestyle sides, and delectable desserts. All our dishes are crafted with love and the finest ingredients.
+          </Text>
+          <Divider borderColor="pink.400" />
+          {menuCategories.map((category, index) => (
+            <MenuCategory key={index} category={category.category} items={category.items} />
+          ))}
+          <Box mt={12} textAlign="center" position="relative">
+            <Button
+              as={RouterLink}
+              to="/about#vegan-menu"
+              size="lg"
+              colorScheme="green"
+              leftIcon={<Icon as={FaLeaf} />}
+              position="relative"  // Ensure button is above the background
+              zIndex={1}
+              py={6}  // Increase padding to make button larger
+              px={8}
+            >
+              Explore Our Vegan Menu
+            </Button>
           </Box>
-        </Box>
-        <Text color="gray.300" fontSize="lg" textAlign="center" maxW="800px">
-          Indulge in our mouthwatering selection of slow-smoked meats, homestyle sides, and delectable desserts. All our dishes are crafted with love and the finest ingredients.
-        </Text>
-        <Divider borderColor="pink.400" />
-        {menuCategories.map((category, index) => (
-          <MenuCategory key={index} category={category.category} items={category.items} />
-        ))}
-        <Box mt={12} textAlign="center">
-          <Button
-            as={RouterLink}
-            to="/about#vegan-menu"
-            size="lg"
-            colorScheme="green"
-            leftIcon={<Icon as={FaLeaf} />}
-          >
-            Explore Our Vegan Menu
-          </Button>
-        </Box>
-      </VStack>
-    </Box>
+        </VStack>
+      </Box>
+    </ParallaxProvider>
   );
 };
 
